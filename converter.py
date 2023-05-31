@@ -1,19 +1,24 @@
-#importing pandas as pd
 import pandas as pd
+import csv
 
-# Read and store content
-# of an excel file
 read_file = pd.read_excel ("test.xlsx")
 
-# Write the dataframe object
-# into csv file
+
 read_file.to_csv ("test.csv",
 				index = None,
 				header=True)
-	
-# read csv file and convert
-# into a dataframe object
-df = pd.DataFrame(pd.read_csv("Test.csv"))
 
-# show the dataframe
+
+df = pd.DataFrame(pd.read_csv("test.csv"))
+
+
+with open('test.csv', newline='') as in_file:
+    with open('test_refactored.csv', 'w', newline='') as out_file:
+        writer = csv.writer(out_file)
+        for row in csv.reader(in_file):
+            if any(row):
+                writer.writerow(row)
+
 df
+
+
